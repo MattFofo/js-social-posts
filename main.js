@@ -58,12 +58,12 @@ const posts = [
 
 console.log(posts[0]['author']['name'])
 
+
 const eleContainerPosts = document.getElementById('container');
 
 
-
-//ciclo per scorrere gli oggetti dell'arrey 
-for (const key in posts) {
+//ciclo per scorrere gli oggetti dell'arrey ed appenderli nel DOM
+for (const indexPost in posts) {
 
     //creo il post con i dati dell'arrey di oggetti posts
     const elePost = document.createElement('div');
@@ -72,28 +72,28 @@ for (const key in posts) {
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src=${posts[key]['author']['image']} alt=${posts[key]['author']['name']}>                    
+                    <img class="profile-pic" src=${posts[indexPost]['author']['image']} alt=${posts[indexPost]['author']['name']}>                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${posts[key]['author']['name']}</div>
-                    <div class="post-meta__time">${posts[key].created}</div>
+                    <div class="post-meta__author">${posts[indexPost]['author']['name']}</div>
+                    <div class="post-meta__time">${posts[indexPost].created}</div>
                 </div>                    
             </div>
         </div>
         <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
         <div class="post__image">
-            <img src=${posts[key]['media']} alt="">
+            <img src=${posts[indexPost]['media']} alt="">
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" href="#" data-postid=${posts[indexPost].id}>
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[key].likes}</b> persone
+                    Piace a <b id=${posts[indexPost].id} class="js-likes-counter">${posts[indexPost].likes}</b> persone
                 </div>
             </div> 
         </div> 
@@ -102,3 +102,30 @@ for (const key in posts) {
     eleContainerPosts.append(elePost);
 
 }
+
+
+
+
+// ciclo per aggiungere eventlistener a tutti i bottoni like
+for (let i = 0; i < posts.length; i++) {
+    const eleLikeButton = document.querySelector(`[data-postid="${posts[i].id}"]`);
+    eleLikeButton.addEventListener('click', pressLikeButton)   
+}
+
+
+const arrPostsLiked = [];
+//funzione per aumentare i likes e salvare gli id dei post liked
+function pressLikeButton() {
+    this.classList.toggle('like-button--liked');
+    const eleLikesCounter = document.querySelectorAll('.js-likes-counter');
+
+    const index = this.attributes['data-postid'].value - 1; // id post
+
+    eleLikesCounter[index].innerHTML = posts[index].likes += 1 // incremento numero likes
+    
+    arrPostsLiked.push(posts[index].id); //inserisco gli id dei post liked in un nuovo arrey
+   
+}
+
+
+console.log(arrPostsLiked)
