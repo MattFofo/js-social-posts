@@ -64,6 +64,17 @@ const eleContainerPosts = document.getElementById('container');
 //ciclo per scorrere gli oggetti dell'arrey ed appenderli nel DOM
 for (const indexPost in posts) {
 
+    //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
+    let authorPicName; 
+    let authorPic;
+    if (posts[indexPost]['author']['image'] == null) {
+        authorPic = 'ms'
+        authorPicName = 'ms'
+        
+    }else {
+        authorPic = posts[indexPost]['author']['image'];
+    }
+
     //creo il post con i dati dell'arrey di oggetti posts
     const elePost = document.createElement('div');
     elePost.classList.add('post');
@@ -71,7 +82,7 @@ for (const indexPost in posts) {
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src=${posts[indexPost]['author']['image']} alt=${posts[indexPost]['author']['name']}>                    
+                    <img class="profile-pic" src=${authorPic} alt=${authorPicName}>                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${posts[indexPost]['author']['name']}</div>
@@ -97,7 +108,9 @@ for (const indexPost in posts) {
             </div> 
         </div> 
     `;
-    
+
+
+
     eleContainerPosts.append(elePost);
 
 }
