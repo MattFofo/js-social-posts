@@ -65,14 +65,17 @@ const eleContainerPosts = document.getElementById('container');
 for (let indexPost = 0; indexPost < posts.length; indexPost++) {
 
     //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
+    let arrNamesAuthors = posts[indexPost]['author']['name'].split(' ');
+    let letterName = arrNamesAuthors[0][0] + arrNamesAuthors[1][0];
     let authorPicName; 
     let authorPic;
     if (posts[indexPost]['author']['image'] == null) {
-        authorPic = 'ms'
-        authorPicName = 'ms'
+        authorPic = null;
+        authorPicName = letterName;
         
     }else {
         authorPic = posts[indexPost]['author']['image'];
+        authorPicName = posts[indexPost]['author']['name'];
     }
 
     //creo il post con i dati dell'arrey di oggetti posts
