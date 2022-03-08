@@ -62,7 +62,7 @@ const eleContainerPosts = document.getElementById('container');
 
 
 //ciclo per scorrere gli oggetti dell'arrey ed appenderli nel DOM
-for (const indexPost in posts) {
+for (let indexPost = 0; indexPost < posts.length; indexPost++) {
 
     //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
     let authorPicName; 
