@@ -114,16 +114,23 @@ for (let i = 0; i < posts.length; i++) {
 
 const arrPostsLiked = [];
 //funzione per aumentare i likes e salvare gli id dei post liked
-function pressLikeButton() {
+function pressLikeButton(event) {
     this.classList.toggle('like-button--liked');
 
     const eleLikesCounter = document.querySelectorAll('.js-likes-counter');
 
     const index = this.attributes['data-postid'].value - 1; // (id post - 1) equivale all'indice del post nell'arrey
 
-    eleLikesCounter[index].innerHTML = posts[index].likes += 1 // incremento numero likes
+    //condizionale per aggiungere o togliere il like 
+    if (this.classList.contains('like-button--liked')) {
+        eleLikesCounter[index].innerHTML = posts[index].likes += 1 // incremento numero likes
+        
+    }else {
+        eleLikesCounter[index].innerHTML = posts[index].likes -= 1 // decremento numero likes
+    }
     
     arrPostsLiked.push(posts[index].id); //inserisco gli id dei post liked in un nuovo arrey
-   
+    
+    event.preventDefault()
 }
 
