@@ -56,7 +56,6 @@ const posts = [
     }
 ];
 
-console.log(posts[0]['author']['name'])
 
 
 const eleContainerPosts = document.getElementById('container');
@@ -109,7 +108,7 @@ for (const indexPost in posts) {
 // ciclo per aggiungere eventlistener a tutti i bottoni like
 for (let i = 0; i < posts.length; i++) {
     const eleLikeButton = document.querySelector(`[data-postid="${posts[i].id}"]`);
-    eleLikeButton.addEventListener('click', pressLikeButton)   
+    eleLikeButton.addEventListener('click', pressLikeButton);   
 }
 
 
@@ -117,9 +116,10 @@ const arrPostsLiked = [];
 //funzione per aumentare i likes e salvare gli id dei post liked
 function pressLikeButton() {
     this.classList.toggle('like-button--liked');
+
     const eleLikesCounter = document.querySelectorAll('.js-likes-counter');
 
-    const index = this.attributes['data-postid'].value - 1; // id post
+    const index = this.attributes['data-postid'].value - 1; // (id post - 1) equivale all'indice del post nell'arrey
 
     eleLikesCounter[index].innerHTML = posts[index].likes += 1 // incremento numero likes
     
@@ -127,5 +127,3 @@ function pressLikeButton() {
    
 }
 
-
-console.log(arrPostsLiked)
