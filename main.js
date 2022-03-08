@@ -65,14 +65,14 @@ const eleContainerPosts = document.getElementById('container');
 for (let indexPost = 0; indexPost < posts.length; indexPost++) {
 
     let arrNamesAuthors = posts[indexPost]['author']['name'].split(' '); //creo un arrey con due elementi: nome cognome autore
-    let letterName = arrNamesAuthors[0][0] + arrNamesAuthors[1][0]; //seleziono la prima lettera di entrambi
+    let firstLettersName = arrNamesAuthors[0][0] + arrNamesAuthors[1][0]; //seleziono la prima lettera di entrambi
     let authorPicName; 
     let authorPic;
     
     //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
     if (posts[indexPost]['author']['image'] == null) {
         authorPic = null;
-        authorPicName = letterName;
+        authorPicName = firstLettersName;
         
     }else {
         authorPic = posts[indexPost]['author']['image'];
@@ -113,21 +113,22 @@ for (let indexPost = 0; indexPost < posts.length; indexPost++) {
         </div> 
     `;
 
-
-
+    
     eleContainerPosts.append(elePost);
-
+    
+    const eleLikeButton = document.querySelector(`[data-postid="${posts[indexPost].id}"]`);
+    eleLikeButton.addEventListener('click', pressLikeButton);   
 }
 
 
 
-
-// ciclo per aggiungere eventlistener a tutti i bottoni like
+/* METODO CON CICLO FOR PER ASSEGNARE EVENTLISTENER
+//ciclo per aggiungere eventlistener a tutti i bottoni like
 for (let i = 0; i < posts.length; i++) {
     const eleLikeButton = document.querySelector(`[data-postid="${posts[i].id}"]`);
     eleLikeButton.addEventListener('click', pressLikeButton);   
 }
-
+*/
 
 const arrPostsLiked = [];
 //funzione per aumentare i likes e salvare gli id dei post liked
