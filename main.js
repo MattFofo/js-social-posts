@@ -64,11 +64,12 @@ const eleContainerPosts = document.getElementById('container');
 //ciclo per scorrere gli oggetti dell'arrey ed appenderli nel DOM
 for (let indexPost = 0; indexPost < posts.length; indexPost++) {
 
-    //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
-    let arrNamesAuthors = posts[indexPost]['author']['name'].split(' ');
-    let letterName = arrNamesAuthors[0][0] + arrNamesAuthors[1][0];
+    let arrNamesAuthors = posts[indexPost]['author']['name'].split(' '); //creo un arrey con due elementi: nome cognome autore
+    let letterName = arrNamesAuthors[0][0] + arrNamesAuthors[1][0]; //seleziono la prima lettera di entrambi
     let authorPicName; 
     let authorPic;
+    
+    //condizionale per inserire le iniziale autore qundo l'immagine profilo non c'è
     if (posts[indexPost]['author']['image'] == null) {
         authorPic = null;
         authorPicName = letterName;
