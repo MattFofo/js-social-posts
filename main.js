@@ -123,14 +123,16 @@ function pressLikeButton(event) {
 
     //condizionale per aggiungere o togliere il like 
     if (this.classList.contains('like-button--liked')) {
+
         eleLikesCounter[index].innerHTML = posts[index].likes += 1 // incremento numero likes
-        
+
+        arrPostsLiked.push(posts[index].id); //inserisco gli id dei post liked in un nuovo arrey
+
     }else {
         eleLikesCounter[index].innerHTML = posts[index].likes -= 1 // decremento numero likes
+
+        arrPostsLiked.pop(posts[index].id); //tolgo dal nuovo arrey gli id dei post a cui ho tolto il like
     }
-    
-    arrPostsLiked.push(posts[index].id); //inserisco gli id dei post liked in un nuovo arrey
     
     event.preventDefault()
 }
-
